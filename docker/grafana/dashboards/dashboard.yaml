@@ -8,3 +8,11 @@ providers:
     options:
       path: /etc/grafana/provisioning/dashboards
       foldersFromFilesStructure: true
+  - name: 'Spring Boot Observability'
+#    orgId: 1
+#    folder: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    options:
+      path: /etc/grafana/dashboards
