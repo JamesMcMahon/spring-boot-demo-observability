@@ -4,11 +4,6 @@ services:
     command: [ '-config.file=/etc/loki/local-config.yaml' ]
     ports:
       - "3100:3100"
-  #  loki:
-  #    image: grafana/loki:3.0.0
-  #    command: -config.file=/etc/loki/local-config.yaml
-  #    ports:
-  #      - "3100:3100"
   prometheus:
     # docs at https://prometheus.io/docs/prometheus/latest/installation/
     image: prom/prometheus:v3.2.1
@@ -20,27 +15,12 @@ services:
       - loki
   tempo:
     image: grafana/tempo:2.7.2
-#    command: [ '-config.file=/etc/tempo.yml' ]
     command: [ "--target=all", "--storage.trace.backend=local", "--storage.trace.local.path=/var/tempo", "--auth.enabled=false" ]
-    #    volumes:
-#      - tempo:/tmp/tempo
-#      - ./docker/grafana/tempo.yml:/etc/tempo.yml:ro
     ports:
-#      - "3200:3200"    # tempo
-#      - "4318:4318"  # otlp http
       - "14250:14250"
       - "4317:4317"
     depends_on:
       - loki
-#  tempo:
-#    image: grafana/tempo:2.4.1
-#    command: [ "--target=all", "--storage.trace.backend=local", "--storage.trace.local.path=/var/tempo", "--auth.enabled=false" ]
-#    ports:
-#      - "14250:14250"
-#      - "4317:4317"
-#    depends_on:
-#      - loki
-#    logging: *default-logging
   grafana:
     # docs at https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
     image: grafana/grafana:11.6.0
@@ -51,13 +31,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-#      - ./docker/grafana/grafana.ini:/etc/grafana/grafana.ini:ro
       - ./docker/grafana/datasources:/etc/grafana/provisioning/datasources:ro
       - ./docker/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
-#    volumes:
-#      - ./etc/grafana/:/etc/grafana/provisioning/datasources
-#      - ./etc/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
-#      - ./etc/dashboards:/etc/grafana/dashboards
     depends_on:
       - prometheus
       - loki
