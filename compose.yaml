@@ -13,14 +13,6 @@ services:
       - "9090:9090"
     depends_on:
       - loki
-#  tempo:
-#    image: grafana/tempo:2.7.2
-#    command: [ "--target=all", "--storage.trace.backend=local", "--storage.trace.local.path=/var/tempo", "--auth.enabled=false" ]
-#    ports:
-#      - "14250:14250"
-#      - "4317:4317"
-#    depends_on:
-#      - loki
   grafana:
     # docs at https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
     image: grafana/grafana:11.6.0
@@ -39,4 +31,3 @@ services:
 
 volumes:
   prometheus:
-#  tempo:
