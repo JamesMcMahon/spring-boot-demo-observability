@@ -1,1 +1,20 @@
 services:
+  loki:
+    image: grafana/loki:3.4
+    command: [ '-config.file=/etc/loki/local-config.yaml' ]
+    ports:
+      - "3100:3100"
+  grafana:
+    # docs at https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
+    image: grafana/grafana:11.6.0
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./docker/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./docker/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+    depends_on:
+      - loki
