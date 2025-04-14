@@ -1,3 +1,7 @@
+global:
+  scrape_interval: 15s # default 60s
+  evaluation_interval: 15s # default 60s
+
 scrape_configs:
   - job_name: 'spring'
     # spring demo app configuration
