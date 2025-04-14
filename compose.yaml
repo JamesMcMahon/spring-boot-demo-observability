@@ -7,8 +7,6 @@ services:
   prometheus:
     # docs at https://prometheus.io/docs/prometheus/latest/installation/
     image: prom/prometheus:v3.2.1
-    volumes:
-      - prometheus:/prometheus
     ports:
       - "9090:9090"
     depends_on:
@@ -28,6 +26,3 @@ services:
     depends_on:
       - prometheus
       - loki
-
-volumes:
-  prometheus:
