@@ -1,8 +1,4 @@
 scrape_configs:
-  - job_name: 'prometheus'
-    # prometheus looking at itself to track metrics about itself
-    static_configs:
-      - targets: ['host.docker.internal:9090']
   - job_name: 'spring'
     # spring demo app configuration
     metrics_path: '/actuator/prometheus'
