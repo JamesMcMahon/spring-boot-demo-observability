@@ -7,8 +7,12 @@ services:
   prometheus:
     # docs at https://prometheus.io/docs/prometheus/latest/installation/
     image: prom/prometheus:v3.2.1
+    command:
+      - --config.file=/etc/prometheus/prometheus.yaml
     ports:
       - "9090:9090"
+    volumes:
+      - ./docker/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
     depends_on:
       - loki
   grafana:
