@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TestDataController {
+public class TestLogsController {
 
-    private final Logger log = LoggerFactory.getLogger(TestDataController.class);
+    private final Logger log = LoggerFactory.getLogger(TestLogsController.class);
 
     @PostMapping("/logs/info")
     public void generateTestInfoLogs() {
