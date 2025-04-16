@@ -20,6 +20,9 @@
         </format>
     </appender>
 
+    <logger name="sh.jfm.springbootdemos.observability" level="DEBUG">
+        <appender-ref ref="LOKI"/>
+    </logger>
     <root level="INFO">
         <appender-ref ref="LOKI"/>
     </root>
