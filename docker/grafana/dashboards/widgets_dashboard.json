@@ -117,7 +117,7 @@
           "hide": false,
           "includeNullMetadata": true,
           "instant": true,
-          "legendFormat": "__auto",
+          "legendFormat": "Widgets Total",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -218,7 +218,7 @@
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
-          "legendFormat": "__auto",
+          "legendFormat": "Avg Time In Seconds",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -242,5 +242,5 @@
   "timezone": "browser",
   "title": "Widgets Dashboard",
   "uid": "cej7rw84ku6f4b",
-  "version": 3
+  "version": 1
 }
