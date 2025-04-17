@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class MetricsConfig {
+public class WidgetMetricsConfig {
 
     @Bean
     public Counter widgetCounter(MeterRegistry registry) {

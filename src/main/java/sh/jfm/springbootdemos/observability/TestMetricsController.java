@@ -19,15 +19,18 @@ public class TestMetricsController {
 
     @PostMapping("/metrics/widgets")
     public void generateTestWidgetMetrics() {
-        long delay = ThreadLocalRandom.current().nextLong(1, 2001);
         try {
-            widgetTimer.record(() -> simulateDelay(delay));
+            widgetTimer.record(TestMetricsController::simulateRandomDelay);
         } finally {
             widgetCounter.increment();
         }
     }
 
-    private void simulateDelay(long delayMS) {
+    private static void simulateRandomDelay() {
+        simulateDelay(ThreadLocalRandom.current().nextLong(1, 2001));
+    }
+
+    private static void simulateDelay(long delayMS) {
         try {
             Thread.sleep(delayMS);
         } catch (InterruptedException e) {
