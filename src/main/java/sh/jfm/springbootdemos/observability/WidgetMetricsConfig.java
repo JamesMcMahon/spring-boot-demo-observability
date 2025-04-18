@@ -1,10 +1,13 @@
 package sh.jfm.springbootdemos.observability;
 
 import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Configuration class to define metrics for monitoring widget creation.
@@ -38,5 +41,14 @@ public class WidgetMetricsConfig {
         return Timer.builder("widgets.creation.time")
                 .description("Time taken to create a widget")
                 .register(registry);
+    }
+
+    @Bean
+    public AtomicInteger widgetActiveRequests(MeterRegistry registry) {
+        var activeRequests = new AtomicInteger(0);
+        Gauge.builder("widgets.creation.active.requests", activeRequests::get)
+                .description("Active widget creation requests")
+                .register(registry);
+        return activeRequests;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Demonstrates Prometheus integration using Micrometer.
@@ -27,10 +28,12 @@ public class TestMetricsController {
 
     private final Counter widgetCounter;
     private final Timer widgetTimer;
+    private final AtomicInteger activeRequests;
 
-    public TestMetricsController(Counter widgetCounter, Timer widgetTimer) {
+    public TestMetricsController(Counter widgetCounter, Timer widgetTimer, AtomicInteger activeRequests) {
         this.widgetCounter = widgetCounter;
         this.widgetTimer = widgetTimer;
+        this.activeRequests = activeRequests;
     }
 
     /**
@@ -47,10 +50,12 @@ public class TestMetricsController {
     @PostMapping("/metrics/widgets")
     public void generateTestWidgetMetrics() {
         log.debug("Creating a Widget (for metrics)");
+        activeRequests.incrementAndGet();
         try {
             widgetTimer.record(TestMetricsController::simulateRandomDelay);
         } finally {
             widgetCounter.increment();
+            activeRequests.decrementAndGet();
         }
     }
 
