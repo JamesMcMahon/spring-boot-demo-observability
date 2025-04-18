@@ -2,6 +2,8 @@ package sh.jfm.springbootdemos.observability;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Timer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 public class TestMetricsController {
+    private final Logger log = LoggerFactory.getLogger(TestMetricsController.class);
+
     private final Counter widgetCounter;
     private final Timer widgetTimer;
 
@@ -19,6 +23,7 @@ public class TestMetricsController {
 
     @PostMapping("/metrics/widgets")
     public void generateTestWidgetMetrics() {
+        log.debug("Creating a widget (for metrics)");
         try {
             widgetTimer.record(TestMetricsController::simulateRandomDelay);
         } finally {
