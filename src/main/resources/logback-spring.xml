@@ -3,6 +3,7 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <springProperty scope="context" name="appName" source="spring.application.name"/>
 
+    <!-- Appender is what actually writes logs to Loki -->
     <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
         <!-- By default, Loki4j flushes at least once a minute, make that 30 seconds for demo purposes -->
         <batchTimeoutMs>30000</batchTimeoutMs>

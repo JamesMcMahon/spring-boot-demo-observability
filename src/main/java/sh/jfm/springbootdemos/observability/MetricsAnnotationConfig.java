@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * <p>
  * Provides support for {@code @Counted} and {@code @Timed} annotations by registering
  * the corresponding aspects as Spring beans.
+ * Requires the dependency spring-boot-starter-aop to work.
  */
 @Configuration
 public class MetricsAnnotationConfig {

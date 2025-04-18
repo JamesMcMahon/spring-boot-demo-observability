@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
+/**
+ * Generates data to test Loki integration
+ */
 @RestController
 public class TestLogsController {
 
@@ -17,17 +21,24 @@ public class TestLogsController {
     public void generateTestInfoLogs() {
         log.info("Test info log");
     }
-    
+
     @PostMapping("/logs/random")
     public void generateRandomLogs(@RequestParam(defaultValue = "10") int lines) {
-        IntStream.range(0, lines).forEach(i -> {
-            String message = "Random log message " + (i + 1);
+        IntStream.range(0, lines).forEach(generateRandomLogLine());
+    }
+
+    private IntConsumer generateRandomLogLine() {
+        return i -> {
             switch ((int) (Math.random() * 4)) {
-                case 0 -> log.info(message);
-                case 1 -> log.debug(message);
-                case 2 -> log.warn(message);
-                case 3 -> log.error(message);
+                case 0 -> log.info(getMessage(i + 1));
+                case 1 -> log.debug(getMessage(i + 1));
+                case 2 -> log.warn(getMessage(i + 1));
+                case 3 -> log.error(getMessage(i + 1));
             }
-        });
+        };
+    }
+
+    private static String getMessage(int number) {
+        return "Random log message " + number;
     }
 }

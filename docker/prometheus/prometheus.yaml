@@ -3,8 +3,8 @@ global:
   evaluation_interval: 15s # default 60s
 
 scrape_configs:
+  # observability demo app configuration
   - job_name: 'spring'
-    # spring demo app configuration
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['host.docker.internal:8080']

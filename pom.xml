@@ -56,6 +56,7 @@
 			<artifactId>micrometer-registry-prometheus</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- Custom Appender needed to write logs to Loki -->
 		<dependency>
 			<groupId>com.github.loki4j</groupId>
 			<artifactId>loki-logback-appender</artifactId>
