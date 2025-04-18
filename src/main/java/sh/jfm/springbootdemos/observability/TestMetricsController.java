@@ -1,5 +1,7 @@
 package sh.jfm.springbootdemos.observability;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Timer;
 import org.slf4j.Logger;
@@ -23,12 +25,20 @@ public class TestMetricsController {
 
     @PostMapping("/metrics/widgets")
     public void generateTestWidgetMetrics() {
-        log.debug("Creating a widget (for metrics)");
+        log.debug("Creating a Widget (for metrics)");
         try {
             widgetTimer.record(TestMetricsController::simulateRandomDelay);
         } finally {
             widgetCounter.increment();
         }
+    }
+
+    @PostMapping("/metrics/macguffins")
+    @Counted(value = "macguffins.created", description = "Number of MacGuffins created")
+    @Timed(value = "macguffins.creation.time", description = "Time taken to create a MacGuffin")
+    public void generateTestMacGuffinMetrics() {
+        log.debug("Creating a MacGuffin (for metrics)");
+        TestMetricsController.simulateRandomDelay();
     }
 
     private static void simulateRandomDelay() {

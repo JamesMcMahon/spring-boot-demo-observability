@@ -62,6 +62,12 @@
 			<version>1.6.0</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- AOP dependency needed for Micrometer annotations -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
