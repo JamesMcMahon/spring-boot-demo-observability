@@ -25,6 +25,31 @@ services:
       # Mounts the local Prometheus configuration file into the container.
       - ./docker/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
 
+  tempo:
+    image: grafana/tempo:2.7.2
+
+    # Explanation of the arguments in the command:
+    # "--target=all": Configures Tempo to enable all subsystems such as the ingester, distributor, querier, etc.
+    # "--storage.trace.backend=local": Specifies the trace backend to use for storage. Here, 'local' indicates that the traces will be stored on the local filesystem.
+    # "--storage.trace.local.path=/var/tempo": Sets the local filesystem path where Tempo will store its trace data.
+    # "--auth.enabled=false": Disables authentication for incoming requests, allowing unrestricted access.
+    # If you don't set a path using "--storage.trace.local.path", Tempo will still try to use
+    # the local backend but will likely fail because it doesn't know where to store the traces.
+    # For a local filesystem backend, specifying a valid path is mandatory to avoid runtime errors.
+    #    command: [ "--target=all", "--storage.trace.backend=local", "--storage.trace.local.path=/var/tempo", "--auth.enabled=false" ]
+    command: [ "--storage.trace.backend=local", "--storage.trace.local.path=/var/tempo", "--auth.enabled=false" ]
+    ports:
+      - "3200:80"   # tempo http
+  #      - "14250:14250" # OpenTelemetry gRPC endpoint.
+  #      - "4317:4317"   # OpenTelemetry Protocol (OTLP) endpoint for traces.
+  #  ports:
+  #    - "14268:14268"  # jaeger ingest
+  #    - "3200:3200"   # tempo
+  #    - "9095:9095" # tempo grpc
+  #    - "4317:4317"  # otlp grpc
+  #    - "4318:4318"  # otlp http
+  #    - "9411:9411"   # zipkin
+
   grafana:
     # Grafana is a visualization platform for time-series data.
     # It integrates with Prometheus and Loki to create interactive dashboards and alerts.
@@ -46,3 +71,4 @@ services:
       # Ensures Prometheus and Loki are started before Grafana.
       - prometheus
       - loki
+      - tempo
