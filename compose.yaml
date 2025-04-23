@@ -1,30 +1,48 @@
+# This docker-compose file defines three services for monitoring and observability:
+# Loki, Prometheus, and Grafana. These tools work together to collect, store, and visualize logs and metrics.
 services:
   loki:
+    # Loki is a log aggregation system designed by Grafana Labs.
+    # It is optimized for efficiency and compatibility with Prometheus and Grafana.
+    # Official documentation: https://grafana.com/docs/loki/latest/
     image: grafana/loki:3.4
     command: [ '-config.file=/etc/loki/local-config.yaml' ]
     ports:
-      - "3100:3100"
+      - "3100:3100"  # Exposes Loki's API on port 3100
+
   prometheus:
-    # docker image documentation at https://prometheus.io/docs/prometheus/latest/installation/
+    # Prometheus is used for monitoring and alerting.
+    # It collects time-series data based on a pull-scraping model, and stores the metrics for analysis.
+    # Official documentation: https://prometheus.io/docs/prometheus/latest/getting_started/
+    # Docker Image documentation: https://prometheus.io/docs/prometheus/latest/installation/
     image: prom/prometheus:v3.2.1
     command:
+      # Specifies the path to Prometheus' configuration file.
       - --config.file=/etc/prometheus/prometheus.yaml
     ports:
-      - "9090:9090"
+      - "9090:9090"  # Exposes the Prometheus web UI on port 9090
     volumes:
+      # Mounts the local Prometheus configuration file into the container.
       - ./docker/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
+
   grafana:
-    # docker image documentation at https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
+    # Grafana is a visualization platform for time-series data.
+    # It integrates with Prometheus and Loki to create interactive dashboards and alerts.
+    # Official documentation: https://grafana.com/docs/grafana/latest/
+    # Docker Image documentation: https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
     image: grafana/grafana:11.6.0
     environment:
+      # Enables anonymous access to Grafana without requiring login.
       - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-      - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin  # Grants admin privileges to anonymous users
+      - GF_AUTH_DISABLE_LOGIN_FORM=true  # Disables the login form
     ports:
-      - "3000:3000"
+      - "3000:3000"  # Exposes Grafana's web interface on port 3000
     volumes:
+      # Mounts Grafana's data source and dashboard configurations into the container.
       - ./docker/grafana/datasources:/etc/grafana/provisioning/datasources:ro
       - ./docker/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
     depends_on:
+      # Ensures Prometheus and Loki are started before Grafana.
       - prometheus
       - loki
