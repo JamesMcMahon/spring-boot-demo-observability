@@ -59,7 +59,8 @@ Key features of Micrometer include:
 ```mermaid
 graph TD
     A[Spring Boot Application] -->|Exposes Metrics| B[/Micrometer\]
-    A -->|Streams Logs| C[Loki]
+    A -->|Logs to Logback| I[/Loki4jAppender\]
+    I -->|Streams to| C[Loki]
     B -->|Scraped by| D[Prometheus]
     D -->|Stores Metrics| G[(Prometheus Database)]
     C -->|Stores Logs| H[(Loki Database)]
