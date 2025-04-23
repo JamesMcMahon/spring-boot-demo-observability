@@ -64,3 +64,10 @@ graph TD
 3. **Log Streaming with Loki**: Logback (or other logging frameworks) streams application logs to Loki for aggregation.
 4. **Visualization in Grafana**: Grafana uses Prometheus as the metrics source and Loki as the log source. Dashboards
    are configured to provide real-time insights into metrics and logs.
+
+## Additional Resources
+
+* [Observability with Spring Boot 3](https://spring.io/blog/2022/10/12/observability-with-spring-boot-3)
+  * [With the accompanying repo](https://github.com/marcingrzejszczak/observability-boot-blog-post)
+* [Spring Boot with Observability](https://github.com/blueswen/spring-boot-observability)
+* [Micrometer Documentation](https://docs.micrometer.io/micrometer/reference/overview.html)
