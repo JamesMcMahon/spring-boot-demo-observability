@@ -10,7 +10,7 @@ import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
 /**
- * Generates data to test Loki integration
+ * Generates log lines to test Loki integration
  */
 @RestController
 public class TestLogsController {
