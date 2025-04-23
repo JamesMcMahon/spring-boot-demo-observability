@@ -4,6 +4,16 @@ This repo contains a demo project providing a minimal example of getting started
 entire stack is represented in a Docker Compose file, and the app creates sample test data to demonstrate
 metric and log generation.
 
+## Getting Started
+
+The application can be run using `./mvnw spring-boot:run`, 
+thanks to [Spring Boot's Docker Compose support](https://docs.spring.io/spring-boot/reference/features/dev-services.html#features.dev-services.docker-compose) 
+this will boot everything needed the stack via the Docker Compose file.
+
+The `seed-data.sh` shell script can then be used to add some sample data to Grafana dashboard, which can be viewed at http://localhost:3000/dashboards.
+
+Data can also manually be added by calling the endpoints detailed in the seed data script directly.
+
 ## Stack Overview
 
 Spring Boot Observability simplifies monitoring and debugging by collecting and centralizing metrics, logs, and traces.
