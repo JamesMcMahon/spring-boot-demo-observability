@@ -4,6 +4,7 @@ import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Timer;
+import io.micrometer.observation.annotation.Observed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * This class contains examples of:<br>
  * - Manual instrumentation: using {@link Counter} and {@link Timer}.<br>
  * - Declarative annotations: {@link Counted} and {@link Timed}.<br>
+ * - Creating an Observation: using the {@link Observed} annotation.<br>
  * These mechanisms monitor application performance and behavior.
  */
 @RestController
@@ -63,6 +65,23 @@ public class TestMetricsController {
     @Timed(value = "macguffins.creation.time", description = "Time taken to create a MacGuffin")
     public void generateTestMacGuffinMetrics() {
         log.debug("Creating a MacGuffin (for metrics)");
+        TestMetricsController.simulateRandomDelay();
+    }
+
+    /**
+     * Simulates Gizmo creation with declarative observation annotations.
+     * <p>
+     * This method demonstrates the use of the {@link Observed} annotation, which collects contextual and
+     * performance data during execution, enabling rich insights when paired with observability tools.
+     * <p>
+     * - {@link Observed}: Observes method execution, capturing associated metrics like duration, errors, and
+     * context.<br>
+     * The `contextualName` attribute provides a human-readable context, useful in dashboards or logs.
+     */
+    @PostMapping("/metrics/gizmos")
+    @Observed(name = "gizmos", contextualName = "generating-test-gizmos")
+    public void generateTestGizmoMetrics() {
+        log.debug("Creating a Gizmo (for metrics)");
         TestMetricsController.simulateRandomDelay();
     }
 

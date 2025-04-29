@@ -12,6 +12,9 @@ seq 1 5 | xargs -n1 -P10 -I{} curl -X POST http://localhost:8080/metrics/widgets
 echo "create 5 macguffins"
 seq 1 5 | xargs -n1 -P10 -I{} curl -X POST http://localhost:8080/metrics/macguffins
 
+echo "create 5 gizmos"
+seq 1 5 | xargs -n1 -P10 -I{} curl -X POST http://localhost:8080/metrics/gizmos
+
 echo "create a single INFO log entry"
 curl -X POST http://localhost:8080/logs/info
 
@@ -23,3 +26,6 @@ seq 1 10 | xargs -n1 -P10 -I{} curl -X POST http://localhost:8080/metrics/widget
 
 echo "create 7 more macguffins"
 seq 1 7 | xargs -n1 -P10 -I{} curl -X POST http://localhost:8080/metrics/macguffins
+
+echo "create 3 more gizmos"
+seq 1 3 | xargs -n1 -P10 -I{} curl -X POST http://localhost:8080/metrics/gizmos
