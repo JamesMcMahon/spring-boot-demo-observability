@@ -52,6 +52,8 @@ public class TestMetricsController {
     /**
      * Simulates MacGuffin creation with declarative metric annotations.
      * <p>
+     * Note: Using declarative annotations requires the Spring Boot AOP dependency.
+     * <p>
      * - {@link Counted}: Automatically increments the counter for MacGuffins created.<br>
      * - {@link Timed}: Records the time taken for the creation process.<br>
      * Declarative metrics simplify instrumentation by replacing manual handling.
