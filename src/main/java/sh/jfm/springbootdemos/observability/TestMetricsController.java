@@ -40,6 +40,9 @@ public class TestMetricsController {
      * - {@link Timer}: Tracks the duration of the task.<br>
      * - {@link Counter}: Counts the number of created widgets.<br>
      * This method provides fine-grained control over metric recording.
+     * <p>
+     * Note: {@link Counter} is technically redundant when used with {@link Timer} as you can use
+     * `widgets_creation_time_seconds` metric instead.
      */
     @PostMapping("/metrics/widgets")
     public void generateTestWidgetMetrics() {
