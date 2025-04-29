@@ -82,3 +82,11 @@ graph TD
   * [With the accompanying repo](https://github.com/marcingrzejszczak/observability-boot-blog-post)
 * [Spring Boot with Observability](https://github.com/blueswen/spring-boot-observability)
 * [Micrometer Documentation](https://docs.micrometer.io/micrometer/reference/overview.html)
+
+## Next Steps
+
+In an effort to keep things simple, this example only covers 2 of the [3 pillars of observability](https://www.youtube.com/watch?v=juP9VApKy_I). Notably Tracing is missing.
+
+I recommend watching the talk below and [checking out the supporting repo](https://github.com/jonatan-ivanov/teahouse) to learn more about tracing.
+
+[![Observability of Your Application by Marcin Grzejszczak & Tommy Ludwig @ Spring I/O 2023](https://img.youtube.com/vi/fh3VbrPvAjg/0.jpg)](https://www.youtube.com/watch?v=fh3VbrPvAjg)
