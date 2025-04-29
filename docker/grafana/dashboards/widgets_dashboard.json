@@ -15,7 +15,7 @@
       }
     ]
   },
-  "description": "Dashboard for widget test metrics",
+  "description": "Dashboard for custom metrics",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
