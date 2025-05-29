@@ -31,7 +31,6 @@ public class WebSecurityConfig {
         return new InMemoryUserDetailsManager(User.withDefaultPasswordEncoder()
                 .username("observability-user")
                 .password("hardcoded-insecure-password")
-//                .roles("USER")
                 .build());
     }
 }
