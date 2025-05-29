@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Disable Loki appender during tests -->
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+
+    <logger name="sh.jfm.springbootdemos.observability" level="DEBUG">
+    </logger>
+    <root level="INFO">
+    </root>
+</configuration>
