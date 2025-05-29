@@ -27,7 +27,7 @@ public class WebSecurityConfig {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        //noinspection deprecation default password encoder is not safe for production, but this this a demo it's okay
+        //noinspection deprecation default password encoder is not safe for production, but this is a demo, so it's okay
         return new InMemoryUserDetailsManager(User.withDefaultPasswordEncoder()
                 .username("observability-user")
                 .password("hardcoded-insecure-password")
