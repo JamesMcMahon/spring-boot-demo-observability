@@ -6,6 +6,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,5 +30,19 @@ class TestSecurityControllerTest {
     void securedEndpoint_WithUnauthenticatedUser_ReturnsUnauthorized() throws Exception {
         mockMvc.perform(get("/secure"))
                 .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void otherEndpoints_WithUnauthenticatedUser_ReturrnsSuccess() throws Exception {
+        for (String url : List.of(
+                "/logs/info",
+                "/logs/random",
+                "/metrics/widgets",
+                "/metrics/macguffins",
+                "metrics/gizmos"
+        )) {
+            mockMvc.perform(get(url))
+                    .andExpect(status().isOk());
+        }
     }
 }
