@@ -14,8 +14,7 @@ import java.util.stream.IntStream;
  */
 @RestController
 public class TestLogsController {
-
-    private final Logger log = LoggerFactory.getLogger(TestLogsController.class);
+    private static final Logger log = LoggerFactory.getLogger(TestLogsController.class);
 
     @PostMapping("/logs/info")
     public void generateTestInfoLogs() {
