@@ -8,11 +8,12 @@ import io.micrometer.observation.aop.ObservedAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 /**
  * Configuration class for enabling Micrometer metrics annotations in the application.
  * <p>
- * Provides support for {@code @Counted} and {@code @Timed} annotations by registering
- * the corresponding aspects as Spring beans.
+ * Provides support for {@code @Counted}, {@code @Timed}, and {@code @Observed} annotations
+ * by registering the corresponding aspects as Spring beans.
  * Requires the dependency spring-boot-starter-aop to work.
  */
 @Configuration
